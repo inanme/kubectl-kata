@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-sleep
+spec:
+  completions: 1
+  parallelism: 1
+  activeDeadlineSeconds: 100
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: bash
+        command: ["bash",  "-c", "echo will sleep;sleep 15;echo done"]
+      restartPolicy: Never
+  backoffLimit: 4
